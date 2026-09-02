@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhan CCTV - Jasa Pasang CCTV Murah Cirebon</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0f172a', /* Biru Navy (Slate 900) */
+                        redaccent: '#dc2626', /* Merah (Red 600) */
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+        /* Remove arrows from number input */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-navy text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-video text-redaccent text-2xl"></i>
+                <span class="text-xl font-bold tracking-wider">FARHAN CCTV</span>
+            </div>
+            <div class="hidden md:flex gap-6 font-semibold">
+                <a href="#home" class="hover:text-redaccent transition">Beranda</a>
+                <a href="#pesan" class="hover:text-redaccent transition">Pemesanan</a>
+                <a href="#lokasi" class="hover:text-redaccent transition">Lokasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="bg-white">
+        <div class="max-w-6xl mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center gap-10">
+            <div class="md:w-1/2 flex flex-col gap-6">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-navy leading-tight">
+                    Jasa CCTV Murah <br> & Profesional
+                </h1>
+                <p class="text-lg text-gray-600 border-l-4 border-redaccent pl-4">
+                    Amankan aset dan properti Anda dengan sistem keamanan CCTV terbaik. Proses cepat, rapi, dan bergaransi.
+                </p>
+                <div class="bg-navy text-white p-4 rounded-xl shadow-md inline-block max-w-sm">
+                    <p class="text-sm uppercase tracking-wide opacity-80 mb-1">Harga Mulai Dari</p>
+                    <p class="text-3xl font-bold text-redaccent">Rp 650.000<span class="text-lg font-normal text-white">/unit</span></p>
+                </div>
+                <div>
+                    <a href="#pesan" class="inline-flex items-center gap-2 bg-redaccent hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:-translate-y-1">
+                        Pesan Sekarang <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 w-full">
+                <!-- Using a generic placeholder for CCTV illustration with Tailwind styles -->
+                <div class="bg-navy rounded-3xl p-2 shadow-2xl relative overflow-hidden h-64 md:h-96 flex justify-center items-center">
+                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                    <i class="fa-solid fa-shield-halved text-9xl text-white opacity-90 z-10"></i>
+                    <i class="fa-solid fa-video text-6xl text-redaccent absolute bottom-10 right-10 z-10 animate-bounce"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Kalkulator & Pemesanan Section -->
+    <section id="pesan" class="py-16 bg-gray-100">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-navy">Kalkulasi & Pemesanan</h2>
+                <p class="text-gray-600 mt-2">Hitung estimasi biaya pemasangan dan pesan langsung via WhatsApp</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="bg-navy p-6 text-white text-center">
+                    <h3 class="text-xl font-semibold">Form Pemesanan Instalasi CCTV</h3>
+                </div>
+                
+                <div class="p-6 md:p-8">
+                    <!-- Pesan Error (Hidden by default) -->
+                    <div id="errorMessage" class="hidden mb-6 bg-red-100 border-l-4 border-redaccent text-red-700 p-4 rounded">
+                        <p class="font-bold">Perhatian</p>
+                        <p id="errorText">Mohon lengkapi semua data dengan benar.</p>
+                    </div>
+
+                    <form id="orderForm" class="space-y-6">
+                        <!-- Input Jumlah -->
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Jumlah Unit CCTV yang ingin dipasang:</label>
+                            <div class="flex items-center gap-4">
+                                <button type="button" onclick="ubahJumlah(-1)" class="bg-gray-200 hover:bg-gray-300 text-navy w-12 h-12 rounded-lg font-bold text-xl flex items-center justify-center transition">-</button>
+                                <input type="number" id="jumlahCCTV" value="1" min="1" class="w-24 text-center text-xl font-bold border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-navy" onchange="hitungTotal()" onkeyup="hitungTotal()">
+                                <button type="button" onclick="ubahJumlah(1)" class="bg-gray-200 hover:bg-gray-300 text-navy w-12 h-12 rounded-lg font-bold text-xl flex items-center justify-center transition">+</button>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">*Harga per unit: Rp 650.000</p>
+                        </div>
+
+                        <hr class="border-gray-200">
+
+                        <!-- Data Pelanggan -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-2">Nama Lengkap</label>
+                                <input type="text" id="nama" class="w-full border-2 border-gray-200 rounded-lg p-3 focus:outline-none focus:border-navy transition" placeholder="Masukkan nama Anda">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-2">Nomor Telepon/WA</label>
+                                <input type="text" id="noHp" class="w-full border-2 border-gray-200 rounded-lg p-3 focus:outline-none focus:border-navy transition" placeholder="Contoh: 08123456789">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Alamat Pemasangan</label>
+                            <textarea id="alamat" rows="3" class="w-full border-2 border-gray-200 rounded-lg p-3 focus:outline-none focus:border-navy transition" placeholder="Detail alamat untuk instalasi..."></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Catatan Tambahan (Opsional)</label>
+                            <input type="text" id="catatan" class="w-full border-2 border-gray-200 rounded-lg p-3 focus:outline-none focus:border-navy transition" placeholder="Misal: Pemasangan hari Sabtu pagi">
+                        </div>
+
+                        <!-- Ringkasan Harga -->
+                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 mt-8">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-semibold">Total Unit:</span>
+                                <span id="displayJumlah" class="text-lg font-bold">1 Unit</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-gray-200 pt-2 mt-2">
+                                <span class="text-gray-800 font-bold text-lg">Total Estimasi Biaya:</span>
+                                <span id="displayTotal" class="text-2xl font-extrabold text-redaccent">Rp 650.000</span>
+                            </div>
+                        </div>
+
+                        <!-- Tombol WA -->
+                        <button type="button" onclick="kirimKeWA()" class="w-full bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-4 rounded-xl shadow-lg transition flex items-center justify-center gap-3 text-lg">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i> Pesan Sekarang Melalui WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lokasi Section -->
+    <section id="lokasi" class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-10 items-center">
+            <div class="md:w-1/2">
+                <h2 class="text-3xl font-bold text-navy mb-6">Lokasi Kami</h2>
+                <div class="flex items-start gap-4 mb-4">
+                    <div class="bg-redaccent text-white p-3 rounded-full flex-shrink-0">
+                        <i class="fa-solid fa-location-dot text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-gray-800">Alamat Toko</h4>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-2">
+                            Jl. Tuparev No. 70<br>
+                            Kedawung, Kab. Cirebon<br>
+                            Jawa Barat
+                        </p>
+                        <a href="https://maps.app.goo.gl/qn5YV2Vwocr5dDx26" target="_blank" class="inline-flex items-center gap-2 text-sm text-white bg-navy hover:bg-redaccent py-2 px-4 rounded-full font-semibold transition shadow-md">
+                            <i class="fa-solid fa-map-location-dot"></i> Buka di Google Maps
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 mt-6">
+                    <div class="bg-navy text-white p-3 rounded-full flex-shrink-0">
+                        <i class="fa-solid fa-phone text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-gray-800">Kontak</h4>
+                        <p class="text-gray-600 text-lg">0853-1449-3980</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 w-full h-80 bg-gray-200 rounded-2xl shadow-inner overflow-hidden relative">
+                 <!-- Embed Google Maps -->
+                 <iframe 
+                    src="https://maps.google.com/maps?q=Jl.+Tuparev+No.+70,+Kedawung,+Kab.+Cirebon,+Jawa+Barat&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-8 border-t-4 border-redaccent">
+        <div class="max-w-6xl mx-auto px-4 text-center flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="font-bold text-xl tracking-widest">FARHAN CCTV</div>
+            <p class="text-gray-400 text-sm">© 2026 Farhan CCTV. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Logic JavaScript -->
+    <script>
+        const HARGA_PER_UNIT = 650000;
+        const NOMOR_WA_OWNER = "6285314493980"; // 0 diganti 62
+
+        // Fungsi format Rupiah
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka);
+        }
+
+        // Fungsi mengubah jumlah dengan tombol +/-
+        function ubahJumlah(nilai) {
+            let inputJumlah = document.getElementById('jumlahCCTV');
+            let jumlahSekarang = parseInt(inputJumlah.value) || 0;
+            let jumlahBaru = jumlahSekarang + nilai;
+            
+            if (jumlahBaru < 1) jumlahBaru = 1;
+            
+            inputJumlah.value = jumlahBaru;
+            hitungTotal();
+        }
+
+        // Fungsi menghitung total harga
+        function hitungTotal() {
+            let inputJumlah = document.getElementById('jumlahCCTV');
+            let jumlah = parseInt(inputJumlah.value);
+            
+            // Validasi agar tidak negatif atau huruf
+            if (isNaN(jumlah) || jumlah < 1) {
+                jumlah = 1;
+                inputJumlah.value = 1;
+            }
+
+            let totalHarga = jumlah * HARGA_PER_UNIT;
+
+            // Update tampilan
+            document.getElementById('displayJumlah').innerText = jumlah + " Unit";
+            document.getElementById('displayTotal').innerText = formatRupiah(totalHarga);
+        }
+
+        // Fungsi untuk menampilkan pesan error custom (pengganti alert)
+        function showError(message) {
+            const errorBox = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.innerText = message;
+            errorBox.classList.remove('hidden');
+            
+            // Scroll ke pesan error
+            errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Sembunyikan setelah 5 detik
+            setTimeout(() => {
+                errorBox.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Fungsi merakit teks dan pindah ke WA
+        function kirimKeWA() {
+            // Ambil data dari form
+            const jumlah = parseInt(document.getElementById('jumlahCCTV').value);
+            const nama = document.getElementById('nama').value.trim();
+            const noHp = document.getElementById('noHp').value.trim();
+            const alamat = document.getElementById('alamat').value.trim();
+            const catatan = document.getElementById('catatan').value.trim();
+            
+            // Validasi data (Apakah field kosong?)
+            if (nama === "") {
+                showError("Silakan isi Nama Lengkap Anda.");
+                document.getElementById('nama').focus();
+                return;
+            }
+            if (noHp === "") {
+                showError("Silakan isi Nomor Telepon/WA Anda.");
+                document.getElementById('noHp').focus();
+                return;
+            }
+            if (alamat === "") {
+                showError("Silakan isi Alamat Pemasangan Anda.");
+                document.getElementById('alamat').focus();
+                return;
+            }
+
+            // Hitung total akhir
+            const totalHarga = jumlah * HARGA_PER_UNIT;
+
+            // Merakit pesan WhatsApp
+            let pesanTeks = `Halo *Farhan CCTV*, saya ingin memesan layanan instalasi CCTV dengan rincian sebagai berikut:\n\n`;
+            pesanTeks += `*Jumlah CCTV:* ${jumlah} Unit\n`;
+            pesanTeks += `*Total Estimasi:* ${formatRupiah(totalHarga)}\n`;
+            pesanTeks += `-------------------------\n`;
+            pesanTeks += `*Nama:* ${nama}\n`;
+            pesanTeks += `*No. HP/WA:* ${noHp}\n`;
+            pesanTeks += `*Alamat Pemasangan:* ${alamat}\n`;
+            
+            if (catatan !== "") {
+                pesanTeks += `*Catatan Tambahan:* ${catatan}\n`;
+            }
+            
+            pesanTeks += `\nMohon informasi lebih lanjut mengenai jadwal pemasangan. Terima kasih.`;
+
+            // Encode string agar aman di URL (spasi menjadi %20, dst)
+            const pesanEncoded = encodeURIComponent(pesanTeks);
+
+            // Buat URL API WhatsApp
+            const waURL = `https://wa.me/${NOMOR_WA_OWNER}?text=${pesanEncoded}`;
+
+            // Buka tab baru menuju WhatsApp
+            window.open(waURL, '_blank');
+        }
+
+        // Inisialisasi awal saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            hitungTotal();
+        });
+    </script>
+</body>
+</html>
