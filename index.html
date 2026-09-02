@@ -32,6 +32,22 @@
         input[type=number] {
             -moz-appearance: textfield;
         }
+        /* Custom animations for CCTV Monitoring device graphics */
+        @keyframes floatDevice {
+            0%, 100% { transform: translateY(0px) rotate(2deg); }
+            50% { transform: translateY(-12px) rotate(-1deg); }
+        }
+        .animate-float {
+            animation: floatDevice 4s ease-in-out infinite;
+        }
+        @keyframes scan {
+            0% { top: 0%; opacity: 0.6; }
+            50% { opacity: 0.3; }
+            100% { top: 100%; opacity: 0.6; }
+        }
+        .animate-scanline {
+            animation: scan 3s linear infinite;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -72,11 +88,129 @@
                 </div>
             </div>
             <div class="md:w-1/2 w-full">
-                <!-- Using a generic placeholder for CCTV illustration with Tailwind styles -->
-                <div class="bg-navy rounded-3xl p-2 shadow-2xl relative overflow-hidden h-64 md:h-96 flex justify-center items-center">
-                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                    <i class="fa-solid fa-shield-halved text-9xl text-white opacity-90 z-10"></i>
-                    <i class="fa-solid fa-video text-6xl text-redaccent absolute bottom-10 right-10 z-10 animate-bounce"></i>
+                <!-- Graphic Box: PC Desktop & iPhone CCTV Live Monitoring -->
+                <div class="bg-navy rounded-3xl p-6 shadow-2xl relative overflow-hidden min-h-[380px] md:min-h-[440px] flex justify-center items-center border border-slate-700">
+                    <div class="absolute inset-0 opacity-15 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                    
+                    <!-- Decorative background glow -->
+                    <div class="absolute -top-12 -left-12 w-48 h-48 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
+                    <div class="absolute -bottom-12 -right-12 w-48 h-48 bg-redaccent rounded-full blur-3xl opacity-20"></div>
+
+                    <!-- Container for Desktop PC & Phone Mockup -->
+                    <div class="relative w-full max-w-lg flex flex-col items-center justify-center">
+                        
+                        <!-- PC Monitor Mockup -->
+                        <div class="w-full max-w-[320px] md:max-w-[380px] bg-slate-800 rounded-xl p-2.5 shadow-2xl border border-slate-600 relative z-10">
+                            <!-- PC Screen Header Bar -->
+                            <div class="bg-slate-900 px-3 py-1.5 rounded-t-lg flex items-center justify-between text-[11px] text-slate-300 border-b border-slate-800">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                                    <span class="font-bold text-white tracking-wider">LIVE MONITORING</span>
+                                </div>
+                                <span class="text-xs text-gray-400 font-mono">4 CAM GRID</span>
+                            </div>
+
+                            <!-- PC Monitor Display Area (4-Cam Grid) -->
+                            <div class="bg-slate-950 p-1.5 rounded-b-lg relative overflow-hidden">
+                                <!-- Scanline effect -->
+                                <div class="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scanline z-20 pointer-events-none"></div>
+
+                                <div class="grid grid-cols-2 gap-1.5 relative z-10">
+                                    <!-- Cam 1 -->
+                                    <div class="bg-slate-900 rounded border border-slate-800 p-2 h-20 md:h-24 flex flex-col justify-between relative overflow-hidden">
+                                        <div class="flex justify-between items-center text-[10px] text-gray-400">
+                                            <span class="font-bold text-white">CAM 01 - TOKO</span>
+                                            <span class="text-red-500 animate-pulse text-[8px]">● REC</span>
+                                        </div>
+                                        <div class="flex items-center justify-center text-slate-700 my-auto">
+                                            <i class="fa-solid fa-store text-2xl text-slate-600"></i>
+                                        </div>
+                                        <div class="text-[8px] text-emerald-400 font-mono flex items-center justify-between">
+                                            <span>1080P</span>
+                                            <i class="fa-solid fa-signal"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cam 2 -->
+                                    <div class="bg-slate-900 rounded border border-slate-800 p-2 h-20 md:h-24 flex flex-col justify-between relative overflow-hidden">
+                                        <div class="flex justify-between items-center text-[10px] text-gray-400">
+                                            <span class="font-bold text-white">CAM 02 - KASIR</span>
+                                            <span class="text-red-500 animate-pulse text-[8px]">● REC</span>
+                                        </div>
+                                        <div class="flex items-center justify-center text-slate-700 my-auto">
+                                            <i class="fa-solid fa-cash-register text-2xl text-slate-600"></i>
+                                        </div>
+                                        <div class="text-[8px] text-emerald-400 font-mono flex items-center justify-between">
+                                            <span>1080P</span>
+                                            <i class="fa-solid fa-signal"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cam 3 -->
+                                    <div class="bg-slate-900 rounded border border-slate-800 p-2 h-20 md:h-24 flex flex-col justify-between relative overflow-hidden">
+                                        <div class="flex justify-between items-center text-[10px] text-gray-400">
+                                            <span class="font-bold text-white">CAM 03 - GUDANG</span>
+                                            <span class="text-red-500 animate-pulse text-[8px]">● REC</span>
+                                        </div>
+                                        <div class="flex items-center justify-center text-slate-700 my-auto">
+                                            <i class="fa-solid fa-warehouse text-2xl text-slate-600"></i>
+                                        </div>
+                                        <div class="text-[8px] text-emerald-400 font-mono flex items-center justify-between">
+                                            <span>1080P</span>
+                                            <i class="fa-solid fa-signal"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cam 4 -->
+                                    <div class="bg-slate-900 rounded border border-slate-800 p-2 h-20 md:h-24 flex flex-col justify-between relative overflow-hidden">
+                                        <div class="flex justify-between items-center text-[10px] text-gray-400">
+                                            <span class="font-bold text-white">CAM 04 - PARKING</span>
+                                            <span class="text-red-500 animate-pulse text-[8px]">● REC</span>
+                                        </div>
+                                        <div class="flex items-center justify-center text-slate-700 my-auto">
+                                            <i class="fa-solid fa-car text-2xl text-slate-600"></i>
+                                        </div>
+                                        <div class="text-[8px] text-emerald-400 font-mono flex items-center justify-between">
+                                            <span>1080P</span>
+                                            <i class="fa-solid fa-signal"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PC Stand Base -->
+                        <div class="w-16 h-4 bg-slate-700 mx-auto -mt-0.5"></div>
+                        <div class="w-32 h-2 bg-slate-600 rounded-full mx-auto shadow-md"></div>
+
+                        <!-- Floating iPhone Mockup -->
+                        <div class="absolute -right-2 md:right-2 -bottom-4 z-30 animate-float">
+                            <div class="w-32 md:w-36 bg-slate-900 rounded-[2rem] p-2 border-4 border-slate-700 shadow-2xl relative">
+                                <!-- iPhone Notch -->
+                                <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-10 h-2 bg-slate-950 rounded-full z-20"></div>
+                                
+                                <!-- iPhone Screen Content -->
+                                <div class="bg-slate-950 rounded-[1.5rem] pt-5 pb-3 px-2 flex flex-col items-center justify-between h-44 border border-slate-800 overflow-hidden relative">
+                                    <div class="w-full flex justify-between items-center text-[8px] text-gray-300 font-semibold px-1">
+                                        <span class="text-red-500 font-bold animate-pulse">● LIVE</span>
+                                        <span class="text-[7px] text-emerald-400">ONLINE</span>
+                                    </div>
+
+                                    <!-- Phone Camera Feed View -->
+                                    <div class="w-full bg-slate-900 rounded-lg p-2 my-1 border border-slate-800 text-center flex flex-col items-center justify-center h-24 relative">
+                                        <i class="fa-solid fa-video text-redaccent text-xl animate-pulse mb-1"></i>
+                                        <span class="text-[9px] font-bold text-white">FARHAN CCTV</span>
+                                        <span class="text-[7px] text-gray-400">Pantau via Smartphone</span>
+                                    </div>
+
+                                    <div class="w-full bg-navy text-white text-[8px] py-1 rounded text-center font-bold">
+                                        <i class="fa-solid fa-mobile-screen-button mr-1"></i> Mobile App
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,7 +236,7 @@
                         <p id="errorText">Mohon lengkapi semua data dengan benar.</p>
                     </div>
 
-                    <form id="orderForm" class="space-y-6">
+                    <form id="orderForm" class="space-y-6" onsubmit="return false;">
                         <!-- Input Jumlah -->
                         <div>
                             <label class="block text-gray-700 font-bold mb-2">Jumlah Unit CCTV yang ingin dipasang:</label>
@@ -171,13 +305,13 @@
                     </div>
                     <div>
                         <h4 class="font-bold text-lg text-gray-800">Alamat Toko</h4>
-                        <p class="text-gray-600 text-lg leading-relaxed mb-2">
+                        <p class="text-gray-600 text-lg leading-relaxed">
                             Jl. Tuparev No. 70<br>
                             Kedawung, Kab. Cirebon<br>
                             Jawa Barat
                         </p>
-                        <a href="https://maps.app.goo.gl/qn5YV2Vwocr5dDx26" target="_blank" class="inline-flex items-center gap-2 text-sm text-white bg-navy hover:bg-redaccent py-2 px-4 rounded-full font-semibold transition shadow-md">
-                            <i class="fa-solid fa-map-location-dot"></i> Buka di Google Maps
+                        <a href="https://maps.app.goo.gl/qn5YV2Vwocr5dDx26" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-redaccent font-bold mt-2 hover:underline">
+                            <i class="fa-solid fa-map-location-dot"></i> Buka Rute di Google Maps
                         </a>
                     </div>
                 </div>
@@ -231,6 +365,8 @@
         // Fungsi mengubah jumlah dengan tombol +/-
         function ubahJumlah(nilai) {
             let inputJumlah = document.getElementById('jumlahCCTV');
+            if (!inputJumlah) return;
+            
             let jumlahSekarang = parseInt(inputJumlah.value) || 0;
             let jumlahBaru = jumlahSekarang + nilai;
             
@@ -243,6 +379,8 @@
         // Fungsi menghitung total harga
         function hitungTotal() {
             let inputJumlah = document.getElementById('jumlahCCTV');
+            if (!inputJumlah) return;
+
             let jumlah = parseInt(inputJumlah.value);
             
             // Validasi agar tidak negatif atau huruf
@@ -253,15 +391,19 @@
 
             let totalHarga = jumlah * HARGA_PER_UNIT;
 
-            // Update tampilan
-            document.getElementById('displayJumlah').innerText = jumlah + " Unit";
-            document.getElementById('displayTotal').innerText = formatRupiah(totalHarga);
+            // Update tampilan jika elemen tersedia
+            const displayJumlah = document.getElementById('displayJumlah');
+            const displayTotal = document.getElementById('displayTotal');
+            if (displayJumlah) displayJumlah.innerText = jumlah + " Unit";
+            if (displayTotal) displayTotal.innerText = formatRupiah(totalHarga);
         }
 
         // Fungsi untuk menampilkan pesan error custom (pengganti alert)
         function showError(message) {
             const errorBox = document.getElementById('errorMessage');
             const errorText = document.getElementById('errorText');
+            if (!errorBox || !errorText) return;
+
             errorText.innerText = message;
             errorBox.classList.remove('hidden');
             
@@ -276,27 +418,35 @@
 
         // Fungsi merakit teks dan pindah ke WA
         function kirimKeWA() {
+            const inputJumlah = document.getElementById('jumlahCCTV');
+            const inputNama = document.getElementById('nama');
+            const inputNoHp = document.getElementById('noHp');
+            const inputAlamat = document.getElementById('alamat');
+            const inputCatatan = document.getElementById('catatan');
+
+            if (!inputJumlah || !inputNama || !inputNoHp || !inputAlamat) return;
+
             // Ambil data dari form
-            const jumlah = parseInt(document.getElementById('jumlahCCTV').value);
-            const nama = document.getElementById('nama').value.trim();
-            const noHp = document.getElementById('noHp').value.trim();
-            const alamat = document.getElementById('alamat').value.trim();
-            const catatan = document.getElementById('catatan').value.trim();
+            const jumlah = parseInt(inputJumlah.value) || 1;
+            const nama = inputNama.value.trim();
+            const noHp = inputNoHp.value.trim();
+            const alamat = inputAlamat.value.trim();
+            const catatan = inputCatatan ? inputCatatan.value.trim() : "";
             
             // Validasi data (Apakah field kosong?)
             if (nama === "") {
                 showError("Silakan isi Nama Lengkap Anda.");
-                document.getElementById('nama').focus();
+                inputNama.focus();
                 return;
             }
             if (noHp === "") {
                 showError("Silakan isi Nomor Telepon/WA Anda.");
-                document.getElementById('noHp').focus();
+                inputNoHp.focus();
                 return;
             }
             if (alamat === "") {
                 showError("Silakan isi Alamat Pemasangan Anda.");
-                document.getElementById('alamat').focus();
+                inputAlamat.focus();
                 return;
             }
 
@@ -318,7 +468,7 @@
             
             pesanTeks += `\nMohon informasi lebih lanjut mengenai jadwal pemasangan. Terima kasih.`;
 
-            // Encode string agar aman di URL (spasi menjadi %20, dst)
+            // Encode string agar aman di URL
             const pesanEncoded = encodeURIComponent(pesanTeks);
 
             // Buat URL API WhatsApp
